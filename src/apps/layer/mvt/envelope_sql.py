@@ -13,8 +13,9 @@ class EnvelopeSQL:
 
     _env: Envelope
 
-    def __init__(self, env: Envelope, mvt_lyr_data: dict):
+    def __init__(self, layer_id: str, env: Envelope, mvt_lyr_data: dict):
         self._env = env
+        self._layer_id = layer_id
         self._mvt_lyr_data = mvt_lyr_data
 
     def _bounds_sql(self):
@@ -64,6 +65,8 @@ class EnvelopeSQL:
                 {attr_cols}
                 FROM {table} t, bounds
                 WHERE ST_Intersects(t.{geom_col}, ST_Transform(bounds.geom, {srid_lyr}))
+                AND
+                layer_id = '{self._layer_id}'
             ) 
             SELECT ST_AsMVT(mvtgeom.*) FROM mvtgeom
         """

@@ -1,18 +1,22 @@
-from src.db.default_connection import DB_DEFAULT
-from src.apps.layer.upload.service import LayerUpload
-from fastapi.middleware.cors import CORSMiddleware
-from fastapi import UploadFile, File, FastAPI
-from src.apps.layer.mvt.service import MVTService
-from fastapi.responses import StreamingResponse
+#!-*-coding:utf-8-*-
 
+from fastapi import FastAPI
+from src.db.default_connection import DB_DEFAULT
+from fastapi.middleware.cors import CORSMiddleware
+from src.rest.layer.routes import router as layer_router
 
 
 app = FastAPI()
 
 
-origins = [
-    "*"
-]
+app.include_router(
+    layer_router,
+    prefix="/layer", tags=["Layer"],
+    responses={404: {"description": "Not found"}},
+)
+
+origins = ["*"]
+
 
 app.add_middleware(
     CORSMiddleware,
@@ -21,33 +25,14 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
 @app.get("/")
 async def root():
     return {"message": "Hello World"}
 
-
-@app.on_event("startup")
+@app.on_event('startup')
 async def startup():
-    print('START')
     await DB_DEFAULT.connect()
 
 
-@app.get("/mvt/{z}/{x}/{y}.{fmt}")
-async def mvt(z: int, x: int, y: int, fmt: str):
-    mvt = MVTService('l1', z, x, y, fmt)
-    headers = {"Access-Control-Allow-Origin": "*", "Content-type": "application/vnd.mapbox-vector-tile"}
-
-    def _gen(pbf) -> bytes:
-        yield pbf
-
-    return StreamingResponse(
-        _gen(await mvt.tiles()), headers=headers
-    )
-
-
-@app.post("/import")
-async def importing(file: UploadFile = File(...)):
-    return await LayerUpload().save(file)
-
 # poetry run sqlacodegen postgresql://postgres:123456@localhost:5432/geolayer --noclasses > models.py
-# poetry add uvicorn app:app --reload

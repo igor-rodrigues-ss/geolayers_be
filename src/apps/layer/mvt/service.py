@@ -12,8 +12,9 @@ from src.apps.layer.mvt.repository.tile_repo import TileRepository
 
 class MVTService:
 
-    def __init__(self, lyr_name: str, z: int, x: int, y: int, fmt: str):
-        self._lyr_name = lyr_name
+    def __init__(self, layer_id: str, z: int, x: int, y: int, fmt: str):
+        # self._lyr_name = lyr_name
+        self._layer_id = layer_id
         self._z = z
         self._x = x
         self._y = y
@@ -29,7 +30,7 @@ class MVTService:
         tile = Tile(self._z, self._x, self._y, self._fmt)
         tile.is_valid()
 
-        tr = TileRepository(EnvelopeSQL(Envelope(tile), {}))
+        tr = TileRepository(EnvelopeSQL(self._layer_id, Envelope(tile), {}))
         return await tr.get_one()
 
     # async def _cached_tiles(self, unique_key: str) -> bytes:

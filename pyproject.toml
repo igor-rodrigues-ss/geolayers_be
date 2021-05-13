@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "geolayers_be"
+name = "kgeo_be"
 version = "0.1.0"
 description = ""
 authors = ["Igor Rodrigues"]
