@@ -8,7 +8,7 @@ from src.apps.layer.upload.shapefile import Shapefile
 
 class LayerUpload:
 
-    async def save(self, file: UploadFile):
+    async def save(self, file: UploadFile, color: str, fill: bool):
         sf = Shapefile(file)
-        repo = LayerImportRepo(sf._file.filename, await sf.features())
+        repo = LayerImportRepo(sf._file.filename, await sf.features(), color, fill)
         await repo.save()

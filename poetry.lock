@@ -1,4 +1,12 @@
 [[package]]
+name = "aiomemcached"
+version = "0.8.2"
+description = "A pure-Python(3.7+) asyncio memcached client, fork from aiomcache."
+category = "main"
+optional = false
+python-versions = ">=3.7"
+
+[[package]]
 name = "aiopg"
 version = "1.2.1"
 description = "Postgres integration with asyncio."
@@ -267,9 +275,13 @@ typeguard = "2.9.1"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "09032bb6b501bcc24309c772447a5bb0b609031102f9d29bcc918b5599197df0"
+content-hash = "01aba6d1ba022524021025180167a5bd98794976ce29533d4211293fc0d2eabb"
 
 [metadata.files]
+aiomemcached = [
+    {file = "AioMemcached-0.8.2-py2.py3-none-any.whl", hash = "sha256:ff1c9e4978a1bc7c5e3cfa78a6c3ce930074622955bef97072cbf44a94dce4e0"},
+    {file = "AioMemcached-0.8.2.tar.gz", hash = "sha256:61b4ae30154b906c493c1fb5461080222a99b814dc9754453fc39b171e1bfcb7"},
+]
 aiopg = [
     {file = "aiopg-1.2.1-py3-none-any.whl", hash = "sha256:736776982f49defe85351687abf745fc49184749eb9d245ab08ce52e0d26c3b7"},
     {file = "aiopg-1.2.1.tar.gz", hash = "sha256:e841da17e56b42de7565890df1a0da247aca4cd6185927be2f7ebb2505a01e92"},

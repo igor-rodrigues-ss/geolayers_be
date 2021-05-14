@@ -12,9 +12,19 @@ class LayerImportRepo:
     _features = None
     _lyr_name = None
 
-    def __init__(self, lyr_name, features):
+    def __init__(self, lyr_name, features, color: str, fill: bool):
         self._features = features
         self._lyr_name = lyr_name
+        self._color = color
+        self._fill = fill
+
+    async def _save_style(self, layer_id: UUID, conn):
+        stmt = t_styles.insert().values(
+            id_layer=layer_id,
+            color=self._color,
+            fill=self._fill
+        )
+        await conn.execute(stmt)
 
     async def _save_layer(self, conn) -> UUID:
         stmt_lyr = t_layer.insert().values(
@@ -49,6 +59,8 @@ class LayerImportRepo:
         print('Inserindo camada......')
         async with DB_DEFAULT.pool().acquire() as conn:
             layer_id = await self._save_layer(conn)
+            await self._save_style(layer_id, conn)
+
             for feat in self._features:
                 feat = json.loads(feat)
                 property_id = await self._save_properties(conn, layer_id, feat)

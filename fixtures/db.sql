@@ -26,3 +26,11 @@ CREATE TABLE layer_geometries(
 	FOREIGN KEY (propertie_id) REFERENCES layer_properties(id),
 	CONSTRAINT geometry_4674 CHECK ((ST_SRID(geometry) = 4674))
 );
+
+CREATE TABLE styles(
+	id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+	layer_id UUID NOT NULL,
+	color VARCHAR(20) NOT NULL,
+	fill BOOLEAN NOT NULL,
+	FOREIGN KEY (layer_id) REFERENCES layer(id)
+);

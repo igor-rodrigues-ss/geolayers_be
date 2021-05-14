@@ -16,6 +16,8 @@ vectorio = "^2.0.4"
 GDAL = "3.0.4"
 sqlacodegen = "^2.3.0"
 GeoAlchemy2 = "^0.8.5"
+AioMemcached = "^0.8.2"
+SQLAlchemy = "^1.4.15"
 
 [tool.poetry.dev-dependencies]
 

@@ -1,0 +1,7 @@
+#!-*-coding:utf-8-*-
+
+CACHE_EXPTIME = 0
+CACHE_HOST = 'localhost'
+CACHE_PORT = 11211
+CACHE_POOL_SIZE_MIN = 4
+CACHE_POOL_SIZE_MAX = 30

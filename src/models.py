@@ -1,5 +1,5 @@
 # coding: utf-8
-from sqlalchemy import CheckConstraint, Column, ForeignKey, Integer, JSON, MetaData, String, Table, Text, text
+from sqlalchemy import Boolean, CheckConstraint, Column, ForeignKey, Integer, JSON, MetaData, String, Table, Text, text
 from sqlalchemy.dialects.postgresql import UUID
 from geoalchemy2.types import Geometry
 
@@ -53,6 +53,15 @@ t_layer_properties = Table(
     Column('id', UUID, primary_key=True, server_default=text("uuid_generate_v4()")),
     Column('layer_id', ForeignKey('layer.id'), nullable=False),
     Column('propertie', JSON, nullable=False)
+)
+
+
+t_styles = Table(
+    'styles', metadata,
+    Column('id', UUID, primary_key=True, server_default=text("uuid_generate_v4()")),
+    Column('id_layer', ForeignKey('layer.id'), nullable=False),
+    Column('color', String(20), nullable=False),
+    Column('fill', Boolean, nullable=False)
 )
 
 
