@@ -1,13 +1,9 @@
 #!-*-coding:utf-8-*-
 
 
-
-
 from src.apps.layer.mvt.envelope import Envelope
-# from src.config upload MERCATOR_SRID, MVT_DENSIFY_FACTOR
+from src.config import MERCATOR_SRID, MVT_DENSIFY_FACTOR
 
-MERCATOR_SRID = 3857
-MVT_DENSIFY_FACTOR = 4
 
 class EnvelopeSQL:
 
@@ -20,7 +16,7 @@ class EnvelopeSQL:
 
     def _bounds_sql(self):
         """
-        Gere SQL para materializar um envelope de consulta em EPSG: 3857.
+        Gera SQL para materializar um envelope de consulta em EPSG:3857.
         Densifique um pouco as bordas para que o envelope possa ser convertido
         com segurança em outros sistemas de coordenadas.
         """
@@ -46,10 +42,9 @@ class EnvelopeSQL:
         Selecione a geometria relevante e corte para os limites MVT
         Converta para o formato MVT
         """
-        geom_col = 'geom'
-        attr_cols = 'id'
-        srid_lyr = 4674
-        table = 'layer_geometries'
+        GEOM_COL = 'geom'
+        SRID = 4674
+        TABLE = 'layer_geometries'
 
         return f"""
             WITH 
@@ -59,12 +54,11 @@ class EnvelopeSQL:
             ),
             mvtgeom AS (
                 SELECT ST_AsMVTGeom(
-                    ST_Transform(t.{geom_col}, {MERCATOR_SRID}),
+                    ST_Transform(t.{GEOM_COL}, {MERCATOR_SRID}),
                     bounds.b2d
-                ) AS geom,
-                {attr_cols}
-                FROM {table} t, bounds
-                WHERE ST_Intersects(t.{geom_col}, ST_Transform(bounds.geom, {srid_lyr}))
+                ) AS geom
+                FROM {TABLE} t, bounds
+                WHERE ST_Intersects(t.{GEOM_COL}, ST_Transform(bounds.geom, {SRID}))
                 AND
                 layer_id = '{self._layer_id}'
             ) 

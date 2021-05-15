@@ -18,6 +18,7 @@ sqlacodegen = "^2.3.0"
 GeoAlchemy2 = "^0.8.5"
 AioMemcached = "^0.8.2"
 SQLAlchemy = "^1.4.15"
+loguru = "^0.5.3"
 
 [tool.poetry.dev-dependencies]
 

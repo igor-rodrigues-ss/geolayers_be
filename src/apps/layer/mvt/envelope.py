@@ -1,7 +1,6 @@
 #!-*-coding:utf-8-*-
 
 
-
 from src.apps.layer.mvt.tile import Tile
 
 
@@ -23,9 +22,9 @@ class Envelope:
         self._tile_merc_size = world_merc_size / world_tile_size
 
 
-    # Calculate geographic bounds from tile coordinates
-    # XYZ tile coordinates are in "image space" so origin is
-    # top-left, not bottom right
+    # Calculando os limites geográficos das coordenadas do tile
+    # As coordenadas do bloco XYZ estão no "espaço da imagem - bbox", então a origem é
+    # superior esquerdo, não inferior direito
 
     def xmin(self):
         return self._world_merc_min + self._tile_merc_size * self._tile.x()

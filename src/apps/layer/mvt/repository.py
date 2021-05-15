@@ -1,7 +1,5 @@
 #!-*-coding:utf-8-*-
 
-
-
 from src.db.default_connection import DB_DEFAULT
 from src.apps.layer.mvt.envelope_sql import EnvelopeSQL
 from typing import Generator
