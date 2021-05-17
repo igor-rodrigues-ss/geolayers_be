@@ -10,6 +10,9 @@ from src.middlewares.try_except import try_except
 from src.framework.log import LOGGER
 
 # TODO: passar o upload para messageria
+# TODO: refatorar upload com celery
+# TODO: criar decorator para repository do upload com celery
+# TODO: criar painel para verificar os status dos uploads
 # TODO: criar uma página de download para arquivos de teste
 # TODO: criar docker para deploy
 # TODO: criar endpoint de helth check para validar memcached, db, celery
@@ -24,7 +27,9 @@ from src.framework.log import LOGGER
 
 
 # poetry run sqlacodegen postgresql://postgres:123456@localhost:5432/geolayer --noclasses > models.py
-# docker run --name memcached -p 11211:11211 -d memcached m^Ccached --threads 4 -m 1024
+# docker run --name memcached -p 11211:11211 --rm -d memcached memcached --threads 4 -m 1024
+# docker run -d --rm --net=host rabbitmq
+# poetry run celery -A src.celery.app worker --loglevel=info
 # Dados Abertos - https://forest-gis.com/download-de-shapefiles/
 
 

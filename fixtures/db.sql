@@ -4,6 +4,14 @@ SET timezone TO 'America/Sao_Paulo';
 
 CREATE EXTENSION IF NOT EXISTS postgis;
 
+create schema tasks;
+
+create table tasks.save_layer(
+	id UUID primary key,
+	layer_name varchar(256),
+	status varchar(20),
+	"detail" text
+);
 
 CREATE TABLE layer(
 	id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,

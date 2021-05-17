@@ -2,8 +2,8 @@
 
 
 from fastapi import UploadFile
-from src.apps.layer.upload.repository import LayerImportRepo
-from src.apps.layer.upload.shapefile import Shapefile
+from src.apps.layer.upload.default.repository import LayerImportRepo
+from src.apps.layer.upload.default.shapefile import Shapefile
 
 
 class LayerUpload:

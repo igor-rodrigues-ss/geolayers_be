@@ -19,6 +19,9 @@ GeoAlchemy2 = "^0.8.5"
 AioMemcached = "^0.8.2"
 SQLAlchemy = "^1.4.15"
 loguru = "^0.5.3"
+celery = "4.4.7"
+asgiref = "^3.3.4"
+flower = "^0.9.7"
 
 [tool.poetry.dev-dependencies]
 

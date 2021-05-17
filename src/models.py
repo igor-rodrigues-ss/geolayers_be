@@ -73,3 +73,18 @@ t_layer_geometries = Table(
     Column('geom', Geometry(from_text='ST_GeomFromEWKT', name='geometry')),
     CheckConstraint('st_srid(geom) = 4674')
 )
+# coding: utf-8
+from sqlalchemy import Column, MetaData, String, Table, Text
+from sqlalchemy.dialects.postgresql import UUID
+
+metadata = MetaData()
+
+
+t_save_layer = Table(
+    'save_layer', metadata,
+    Column('id', UUID, primary_key=True),
+    Column('layer_name', String(256)),
+    Column('status', String(20)),
+    Column('detail', Text),
+    schema='tasks'
+)
