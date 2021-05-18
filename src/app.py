@@ -4,21 +4,21 @@ from fastapi import FastAPI
 from src.db.default_connection import DB_DEFAULT
 from fastapi.middleware.cors import CORSMiddleware
 from src.rest.layer.routes import router as layer_router
+from src.rest.tasks.routes import router as tasks_router
 from src.cache.cache import CACHE
 from src.cache.engines.no_cache import NoCache
 from src.middlewares.try_except import try_except
 from src.framework.log import LOGGER
 
-# TODO: passar o upload para messageria
 # TODO: refatorar upload com celery
-# TODO: criar decorator para repository do upload com celery
-# TODO: criar painel para verificar os status dos uploads
 # TODO: criar uma página de download para arquivos de teste
+# TODO: criar schemas de request e response
+# TODO: implementar testes unitários (Verificar mocks de banco de dados)
 # TODO: criar docker para deploy
 # TODO: criar endpoint de helth check para validar memcached, db, celery
 # TODO: Adicionar uma ferramenta de log para monitoramento em tempo real (Prometheus ou Grafana)
 # TODO: criar autenticação
-# TODO: implementar testes unitários (Verificar mocks de banco de dados)
+
 
 # TODO: adicionar upload de geojson e geopackage
 # TODO: criar desenho com a arquitetura do back (MEMCACHED, FastAPI, CELERY e RABBIT)
@@ -64,6 +64,12 @@ def create_app():
         prefix="/layer", tags=["Layer"],
         responses={404: {"description": "Not found"}},
     )
+    app.include_router(
+        tasks_router,
+        prefix="/tasks", tags=["Tasks"],
+        responses={404: {"description": "Not found"}},
+    )
+
 
     return app
 

@@ -5,8 +5,7 @@ from fastapi import UploadFile, File, Form
 from src.apps.layer.list.repository import LayerListRepo
 from src.apps.layer.mvt.service import MVTService
 from fastapi.responses import StreamingResponse
-# from src.apps.layer.upload.default.service import LayerUpload
-from src.apps.layer.upload.celery.service import LayerUpload
+from src.apps.layer.upload.service import LayerUpload
 
 
 class LayerView:
@@ -18,10 +17,8 @@ class LayerView:
             await mvt.tiles(), headers=headers
         )
 
-    async def post( # TODO: retorno é um 204
-            self, file: UploadFile = File(...),
-            color: str = Form(...),
-            fill: bool = Form(...)
+    async def post(
+        self, file: UploadFile = File(...), color: str = Form(...), fill: bool = Form(...)
     ):
         await LayerUpload().save(file, color, fill)
 
