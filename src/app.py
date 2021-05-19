@@ -11,6 +11,10 @@ from src.middlewares.try_except import try_except
 from src.framework.log import LOGGER
 
 # TODO: refatorar upload com celery
+# TODO: adicionar um shape menor nos testes de upload
+# TODO: criar validação para arquivos que não possuem extensão
+# TODO: remover bibliotecas inutilizadas e ajustar libs usadas somente em teste
+# TODO: criar variáveis de ambiente no pytest e em dev
 # TODO: criar uma página de download para arquivos de teste
 # TODO: criar schemas de request e response
 # TODO: implementar testes unitários (Verificar mocks de banco de dados)

@@ -10,4 +10,4 @@ router = APIRouter()
 view = TasksSaveLayer()
 
 
-router.get('', name='get_all_saving_layers')(view.list_all)
+router.get('', name='list_all_tasks_save_layer')(view.list_all)

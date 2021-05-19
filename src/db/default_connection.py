@@ -4,6 +4,8 @@ from aiopg.sa.engine import Engine
 from aiopg.sa import create_engine
 from src.db.managed_pool import managed_pool
 
+from src.config import ENVS
+
 
 class Database:
 
@@ -40,9 +42,9 @@ class Database:
 
 
 DB_DEFAULT = Database(
-    'localhost',
-    'geolayer',
-    'postgres',
-    '123456',
-    '5432'
+    ENVS.DB_HOST,
+    ENVS.DB_NAME,
+    ENVS.DB_USER,
+    ENVS.DB_PASSWORD,
+    ENVS.DB_PORT
 )
