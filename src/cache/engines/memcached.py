@@ -2,8 +2,9 @@
 
 
 from src.config import (
-    CACHE_HOST, CACHE_PORT, CACHE_POOL_SIZE_MIN, CACHE_POOL_SIZE_MAX
+    ENVS, CACHE_POOL_SIZE_MIN, CACHE_POOL_SIZE_MAX
 )
+
 from aiomemcached import Client
 from src.config import CACHE_EXPTIME
 from src.cache.icache import ICache
@@ -13,7 +14,7 @@ class MemCachedCache(ICache):
 
     def __init__(self):
         self._client = Client(
-            host=CACHE_HOST, port=CACHE_PORT,
+            host=ENVS.CACHE_HOST, port=int(ENVS.CACHE_PORT),
             pool_minsize=CACHE_POOL_SIZE_MIN, pool_maxsize=CACHE_POOL_SIZE_MAX
         )
 

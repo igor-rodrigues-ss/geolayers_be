@@ -4,20 +4,20 @@ import pytest
 from fastapi import status
 from tests.utils import is_uuid
 from tests.conftest import url_for
-
-
-PATH = '/home/igor/igor/pos-graduacao/data/BR_UF_2020.zip'
-COLOR = '#222'
-FILL = True
-NAME = 'BR_UF_2020'
-FILE_NAME = f'{NAME}.zip'
+from src.db.default_conn_celery import engine
+# from src.models import t_layer
+from tests.constants import FILL, FILE_NAME, PATH, COLOR, NAME
 
 
 @pytest.fixture(scope='module', autouse=True)
 def create_layer(client):
+    with engine.connect() as conn:
+        # TODO: passar este sql para ORM
+        conn.execute('truncate table layer cascade;')
+
     client.post(
         url_for('upload_layer'),
-        files={'file': (FILE_NAME, open(PATH, "rb")),},
+        files={'file': (FILE_NAME, open(PATH, "rb"))},
         data={'color': COLOR, 'fill': FILL}
     )
 

@@ -38,8 +38,8 @@ class Config:
 config = Config()
 
 
-def url_for(name: str):
-    return config.app().url_path_for(name)
+def url_for(name, **args):
+    return config.app().url_path_for(name, **args)
 
 
 @pytest.fixture(scope='session')

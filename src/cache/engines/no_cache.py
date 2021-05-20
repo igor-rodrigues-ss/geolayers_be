@@ -10,6 +10,8 @@ class NoCache(ICache):
         return None
 
     async def get(self, key: bytes) -> bytes:
+        # LOGGER.info('Cache desabilitado.')
+        print('Cache desabilitado.')
         return None
 
     async def set(self, key: bytes, val: bytes, exptime: int = CACHE_EXPTIME):

@@ -1,11 +1,18 @@
 #!-*-coding:utf-8-*-
 
+
+import os
 from pydantic import BaseSettings
+
+
+ROOT_DIR = os.path.dirname(
+    os.path.dirname(
+        os.path.abspath(__file__)
+    )
+)
 
 CACHE_EXPTIME = 0
 
-CACHE_HOST = 'localhost'
-CACHE_PORT = 11211
 CACHE_POOL_SIZE_MIN = 4
 CACHE_POOL_SIZE_MAX = 30
 MVT_ALLOWED_FORMATS = ['pbf', 'mvt']
@@ -28,6 +35,14 @@ class Envs(BaseSettings):
     DB_NAME: str = 'geolayer'
     DB_USER: str = 'postgres'
     DB_PASSWORD: str = '123456'
+    CACHE_HOST: str = 'localhost'
+    CACHE_PORT: str = '11211'
+    RABBIT_HOST: str = 'localhost'
+    RABBIT_USER: str = 'guest'
+    RABBIT_PASSWORD: str = 'guest'
+    RABBIT_PORT: str = '5672'
+
+
 
 ENVS = Envs()
 

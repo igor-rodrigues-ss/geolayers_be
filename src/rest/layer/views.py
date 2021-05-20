@@ -1,7 +1,7 @@
 #!-*-coding:utf-8-*-
 
 
-from fastapi import UploadFile, File, Form
+from fastapi import UploadFile, File, Form, Response, status
 from src.apps.layer.list.repository import LayerListRepo
 from src.apps.layer.mvt.service import MVTService
 from fastapi.responses import StreamingResponse
@@ -21,6 +21,7 @@ class LayerView:
         self, file: UploadFile = File(...), color: str = Form(...), fill: bool = Form(...)
     ):
         await LayerUpload().save(file, color, fill)
+        return Response(status_code=status.HTTP_204_NO_CONTENT)
 
     async def list_all(self):
         return await LayerListRepo().list_all()

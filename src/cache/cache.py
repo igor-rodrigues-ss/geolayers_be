@@ -18,8 +18,6 @@ class CacheSingleton(ICache):
         return self._engine
 
     async def get(self, key: bytes) -> bytes:
-        # LOGGER.info('Cache desabilitado.')
-        print('Cache desabilitado.')
         return await self._engine.get(key)
 
     async def set(self, key: bytes, val: bytes, exptime: int = CACHE_EXPTIME):

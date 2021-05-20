@@ -1,24 +1,18 @@
 #!-*-coding:utf-8-*-
 
 import pytest
-from uuid import UUID
 from fastapi import status
 from tests.conftest import url_for
 from src.config import WORKER_STATUS_SUCCESS
 from tests.utils import is_uuid
-
-PATH = '/home/igor/igor/pos-graduacao/data/BR_UF_2020.zip'
-COLOR = '#222'
-FILL = True
-NAME = 'BR_UF_2020'
-FILE_NAME = f'{NAME}.zip'
+from tests.constants import FILL, FILE_NAME, PATH, COLOR, NAME
 
 
 @pytest.fixture(scope='module', autouse=True)
 def create_layer(client):
     client.post(
         url_for('upload_layer'),
-        files={'file': (FILE_NAME, open(PATH, "rb")),},
+        files={'file': (FILE_NAME, open(PATH, "rb"))},
         data={'color': COLOR, 'fill': FILL}
     )
 

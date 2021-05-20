@@ -11,19 +11,19 @@ from src.middlewares.try_except import try_except
 from src.framework.log import LOGGER
 
 # TODO: refatorar upload com celery
-# TODO: adicionar um shape menor nos testes de upload
-# TODO: criar validação para arquivos que não possuem extensão
-# TODO: remover bibliotecas inutilizadas e ajustar libs usadas somente em teste
-# TODO: criar variáveis de ambiente no pytest e em dev
+# TODO; ajustar connections async e sync
+# TODO: criar docker para deploy
 # TODO: criar uma página de download para arquivos de teste
 # TODO: criar schemas de request e response
-# TODO: implementar testes unitários (Verificar mocks de banco de dados)
-# TODO: criar docker para deploy
+
+# TODO: criar variáveis de ambiente no pytest e em dev
+# TODO: criar validação para arquivos que não possuem extensão
+# TODO: remover bibliotecas inutilizadas e ajustar libs usadas somente em teste
 # TODO: criar endpoint de helth check para validar memcached, db, celery
 # TODO: Adicionar uma ferramenta de log para monitoramento em tempo real (Prometheus ou Grafana)
 # TODO: criar autenticação
 
-
+# TODO: configurar ondelete cascade e onUpade cascade no banco
 # TODO: adicionar upload de geojson e geopackage
 # TODO: criar desenho com a arquitetura do back (MEMCACHED, FastAPI, CELERY e RABBIT)
 # TODO: FRONT - ajustar o changeLayerVisibility para passar somente os dados necessários (id e show)

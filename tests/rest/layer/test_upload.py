@@ -2,18 +2,15 @@
 
 from fastapi import status
 from tests.conftest import url_for
+from tests.constants import FILL, FILE_NAME, PATH, COLOR
 
 
-PATH = '/home/igor/igor/pos-graduacao/data/BR_UF_2020.zip'
-
-
-class TestUpload:
+class TestUploadlayer:
 
     def test_post_204(self, client):
         resp = client.post(
             url_for('upload_layer'),
-            files={'file': ("file.zip", open(PATH, "rb"))},
-            data={'color': '#222', 'fill': 'true'}
+            files={'file': (FILE_NAME, open(PATH, "rb"))},
+            data={'color': COLOR, 'fill': FILL}
         )
         assert resp.status_code == status.HTTP_204_NO_CONTENT
-
