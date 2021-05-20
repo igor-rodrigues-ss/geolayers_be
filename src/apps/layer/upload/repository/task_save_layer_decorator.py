@@ -1,7 +1,7 @@
 #!-*-coding:utf-8-*-
 
 from uuid import UUID
-from src.models import t_save_layer
+from src.db.models import t_save_layer
 from sqlalchemy.engine.base import Connection
 from src.apps.layer.upload.repository.ilayer_upload import ILayerUploadRepository
 from src.config import WORKER_STATUS_PENDING, WORKER_STATUS_SUCCESS, WORKER_STATUS_FAILURE

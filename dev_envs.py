@@ -1,0 +1,15 @@
+import os
+
+os.environ['DB_HOST'] = 'localhost'
+os.environ['DB_PORT'] = '5432'
+os.environ['DB_NAME'] = 'geolayer'
+os.environ['DB_USER'] = 'postgres'
+os.environ['DB_PASSWORD'] = '123456'
+os.environ['CACHE_HOST'] = 'localhost'
+os.environ['CACHE_PORT'] = '11211'
+os.environ['RABBIT_HOST'] = 'localhost'
+os.environ['RABBIT_USER'] = 'guest'
+os.environ['RABBIT_PASSWORD'] = 'guest'
+os.environ['RABBIT_PORT'] = '5672'
+os.environ['STORAGE_PATH'] = '/tmp/geolayer'
+os.environ['RABBIT_VHOST'] = '/'

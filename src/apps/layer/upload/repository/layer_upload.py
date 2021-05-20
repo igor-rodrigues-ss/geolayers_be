@@ -5,7 +5,7 @@ import json
 from typing import Generator
 from sqlalchemy.engine.base import Connection
 from geoalchemy2.functions import ST_GeomFromGeoJSON, ST_SetSRID
-from src.models import *
+from src.db.models import *
 from src.apps.layer.upload.repository.ilayer_upload import ILayerUploadRepository
 
 

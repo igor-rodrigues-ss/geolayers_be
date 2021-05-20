@@ -2,10 +2,9 @@
 
 import pytest
 from fastapi import status
-from tests.utils import path_test_file
 from tests.conftest import url_for
-from src.db.default_conn_celery import engine
-from src.models import t_layer
+from src.db.sync_connection import SYNC_DB
+from src.db.models import t_layer
 from tests.constants import FILL, FILE_NAME, PATH, COLOR
 
 
@@ -16,7 +15,7 @@ def created_layer(client):
         files={'file': (FILE_NAME, open(PATH, "rb"))},
         data={'color': COLOR, 'fill': FILL}
     )
-    with engine.connect() as conn:
+    with SYNC_DB.engine().connect() as conn:
         row = conn.execute(t_layer.select())
         row = row.fetchone()
         return {'id': row.id}

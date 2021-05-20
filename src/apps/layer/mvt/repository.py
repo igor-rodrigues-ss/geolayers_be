@@ -1,8 +1,10 @@
 #!-*-coding:utf-8-*-
 
-from src.db.default_connection import DB_DEFAULT
+from src.db.async_connection import ASYNC_DB
 from src.apps.layer.mvt.envelope_sql import EnvelopeSQL
 from typing import Generator
+
+from sqlalchemy.sql.expression import text
 
 
 class TileRepository:
@@ -16,12 +18,11 @@ class TileRepository:
         pbf = None
         data = None
 
-        async with DB_DEFAULT.pool().acquire() as conn:
-        # async with DB_DEFAULT.pool() as conn:
-            data = await conn.execute(self._env.sql())
-            data = await data.fetchone()
-            pbf = data[0]
+        async with ASYNC_DB.engine().begin() as conn:
+            data = await conn.execute(text(self._env.sql()))
+            pbf = data.fetchone()[0]
 
         if pbf is None:
             return b''
-        return pbf.tobytes()
+
+        return pbf

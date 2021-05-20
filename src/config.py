@@ -11,6 +11,8 @@ ROOT_DIR = os.path.dirname(
     )
 )
 
+DB_POOL_MAX_SIZE = 4
+
 CACHE_EXPTIME = 0
 
 CACHE_POOL_SIZE_MIN = 4
@@ -30,20 +32,23 @@ WORKER_STATUS_FAILURE = 'FAILURE'
 
 
 class Envs(BaseSettings):
-    DB_HOST: str = 'localhost'
-    DB_PORT: str = '5432'
-    DB_NAME: str = 'geolayer'
-    DB_USER: str = 'postgres'
-    DB_PASSWORD: str = '123456'
-    CACHE_HOST: str = 'localhost'
-    CACHE_PORT: str = '11211'
-    RABBIT_HOST: str = 'localhost'
-    RABBIT_USER: str = 'guest'
-    RABBIT_PASSWORD: str = 'guest'
-    RABBIT_PORT: str = '5672'
-
+    DB_HOST: str
+    DB_PORT: str
+    DB_NAME: str
+    DB_USER: str
+    DB_PASSWORD: str
+    CACHE_HOST: str
+    CACHE_PORT: str
+    RABBIT_HOST: str
+    RABBIT_USER: str
+    RABBIT_PASSWORD: str
+    RABBIT_PORT: str
+    RABBIT_VHOST: str
+    STORAGE_PATH: str
 
 
 ENVS = Envs()
 
+
+UPLOADED_FILE_PATH = os.path.join(ENVS.STORAGE_PATH, 'uploaded_files')
 

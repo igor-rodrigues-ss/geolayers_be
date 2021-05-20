@@ -4,7 +4,7 @@ import os
 import pytest
 import testing.postgresql
 from sqlalchemy import create_engine
-from src.celery.app import celery_app
+
 from fastapi.testclient import TestClient
 
 
@@ -14,14 +14,12 @@ class Config:
         self.PG = testing.postgresql.Postgresql()
 
     def create_test_database(self):
-        PG = self.PG
-        engine = create_engine(PG.url())
-        # TODO: passar esse sql para variáveis de ambiente do pytest
-        sql = '/home/igor/igor/portifolio/kgeo_be/fixtures/db.sql'
+        engine = create_engine(self.PG.url())
+        sql = os.environ['SQL_MIGRATIONS_PATH']
 
-        os.environ['DB_NAME'] = PG.dsn()['database']
-        os.environ['DB_PORT'] = str(PG.dsn()['port'])
-        os.environ['DB_HOST'] = PG.dsn()['host']
+        os.environ['DB_NAME'] = self.PG.dsn()['database']
+        os.environ['DB_PORT'] = str(self.PG.dsn()['port'])
+        os.environ['DB_HOST'] = self.PG.dsn()['host']
 
         with engine.connect() as conn:
             with open(sql) as f:
@@ -34,16 +32,21 @@ class Config:
         from src.app import app
         return app
 
+    def config_celery(self):
+        from src.celery.app import celery_app
+        celery_app.conf.update(CELERY_ALWAYS_EAGER=True)
+
 
 config = Config()
 
 
-def url_for(name, **args):
+def url_for(name: str, **args):
     return config.app().url_path_for(name, **args)
 
 
 @pytest.fixture(scope='session')
 def client():
+    config.config_celery()
     with TestClient(config.app()) as tc:
         yield tc
 
@@ -54,9 +57,6 @@ def pytest_sessionstart(session):
 
 def pytest_sessionfinish(session, exitstatus):
     config.drop_test_database()
-
-
-celery_app.conf.update(CELERY_ALWAYS_EAGER=True)
 
 
 #from async_asgi_testclient import TestClient

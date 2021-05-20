@@ -1,6 +1,8 @@
 #!-*-coding:utf-8-*-
 
+import os
 from fastapi import UploadFile
+from src.config import UPLOADED_FILE_PATH
 
 
 class SentFile:
@@ -14,7 +16,7 @@ class SentFile:
         return '.'.join(fname_splited[:-1])
 
     async def save(self):
-        fpath = f'/tmp/{self._file.filename}'
+        fpath = os.path.join(UPLOADED_FILE_PATH, self._file.filename)
         with open(fpath, 'wb') as f:
             cont = await self._file.read()
             f.write(cont)
