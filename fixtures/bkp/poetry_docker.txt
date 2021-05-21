@@ -1,0 +1,6 @@
+RUN apt install curl -y && \
+    curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python3.9
+
+RUN /bin/bash -c "source /root/.poetry/env && \
+    poetry config virtualenvs.create false --local && \
+    poetry install --no-dev"

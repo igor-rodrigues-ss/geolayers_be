@@ -5,4 +5,4 @@ import os
 import dev_envs as _
 
 
-os.system('poetry run uvicorn src.app:app --reload')
+os.system('pipenv run uvicorn src.app:app --reload')

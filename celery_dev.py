@@ -4,4 +4,4 @@ import os
 import dev_envs as _
 
 
-os.system('poetry run celery -A src.celery.app worker --loglevel=info')
+os.system('pipenv run celery -A src.celery.app worker --loglevel=info')
