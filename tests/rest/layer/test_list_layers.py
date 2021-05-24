@@ -14,7 +14,7 @@ def create_layer(client):
 
     with SYNC_DB.engine().connect() as conn:
         # TODO: passar este sql para ORM
-        conn.execute('truncate table layer cascade;')
+        conn.execute('truncate table layers.layer cascade;')
 
     client.post(
         url_for('upload_layer'),

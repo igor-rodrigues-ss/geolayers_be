@@ -5,6 +5,7 @@ SET timezone TO 'America/Sao_Paulo';
 CREATE EXTENSION IF NOT EXISTS postgis;
 
 create schema tasks;
+create schema layers;
 
 create table tasks.save_layer(
 	id UUID primary key,
@@ -13,32 +14,32 @@ create table tasks.save_layer(
 	"detail" text
 );
 
-CREATE TABLE layer(
+CREATE TABLE layers.layer(
 	id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
 	nome varchar(256) NOT NULL
 );
 
-CREATE TABLE layer_properties(
+CREATE TABLE layers.properties(
 	id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
 	layer_id UUID NOT NULL,
-	propertie json NOT NULL,
-	FOREIGN KEY (layer_id) REFERENCES layer(id)
+	properties json NOT NULL,
+	FOREIGN KEY (layer_id) REFERENCES layers.layer(id)
 );
 
-CREATE TABLE layer_geometries(
+CREATE TABLE layers.geometries(
 	id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
 	layer_id UUID NOT NULL,
-	propertie_id UUID NOT NULL,
+	properties_id UUID NOT NULL,
 	geom geometry,
-	FOREIGN KEY (layer_id) REFERENCES layer(id),
-	FOREIGN KEY (propertie_id) REFERENCES layer_properties(id),
+	FOREIGN KEY (layer_id) REFERENCES layers.layer(id),
+	FOREIGN KEY (properties_id) REFERENCES layers.properties(id),
 	CONSTRAINT geometry_4674 CHECK ((ST_SRID(geom) = 4674))
 );
 
-CREATE TABLE styles(
+CREATE TABLE layers.styles(
 	id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
-	id_layer UUID NOT NULL,
+	layer_id UUID NOT NULL,
 	color VARCHAR(20) NOT NULL,
 	fill BOOLEAN NOT NULL,
-	FOREIGN KEY (id_layer) REFERENCES layer(id)
+	FOREIGN KEY (layer_id) REFERENCES layers.layer(id)
 );

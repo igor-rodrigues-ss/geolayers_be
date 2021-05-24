@@ -44,7 +44,7 @@ class EnvelopeSQL:
         """
         GEOM_COL = 'geom'
         SRID = 4674
-        TABLE = 'layer_geometries'
+        TABLE = 'layers.geometries'
 
         return f"""
             WITH 

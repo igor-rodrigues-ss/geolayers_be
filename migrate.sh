@@ -1,0 +1,2 @@
+pipenv run sqlacodegen postgresql://postgres:123456@localhost:5432/geolayer --schema layers --noclasses > src/db/models.py
+pipenv run sqlacodegen postgresql://postgres:123456@localhost:5432/geolayer --schema tasks --noclasses >> src/db/models.py

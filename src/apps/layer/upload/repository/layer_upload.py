@@ -5,8 +5,9 @@ import json
 from typing import Generator
 from sqlalchemy.engine.base import Connection
 from geoalchemy2.functions import ST_GeomFromGeoJSON, ST_SetSRID
-from src.db.models import *
+from src.db.models import t_styles, t_layer, t_geometries, t_properties
 from src.apps.layer.upload.repository.ilayer_upload import ILayerUploadRepository
+from uuid import UUID
 
 
 class LayerUploadRepository(ILayerUploadRepository):
@@ -29,7 +30,7 @@ class LayerUploadRepository(ILayerUploadRepository):
 
     def _save_style(self, layer_id: UUID):
         stmt = t_styles.insert().values(
-            id_layer=layer_id,
+            layer_id=layer_id,
             color=self._color,
             fill=self._fill
         )
@@ -45,10 +46,10 @@ class LayerUploadRepository(ILayerUploadRepository):
         return row[0]
 
     def _save_properties(self, layer_id: UUID, feat) -> UUID:
-        stmt_prop = t_layer_properties.insert().values(
+        stmt_prop = t_properties.insert().values(
             layer_id=str(layer_id),
-            propertie=json.dumps(feat['properties'])
-        ).returning(t_layer_properties.c.id)
+            properties=json.dumps(feat['properties'])
+        ).returning(t_properties.c.id)
 
         row = self._conn.execute(stmt_prop)
         row = row.fetchone()
@@ -56,9 +57,9 @@ class LayerUploadRepository(ILayerUploadRepository):
 
     def _save_geometry(self, layer_id: UUID, property_id: UUID, feat):
         geom = json.dumps(feat['geometry'])
-        stmt_geom = t_layer_geometries.insert().values(
+        stmt_geom = t_geometries.insert().values(
             layer_id=str(layer_id),
-            propertie_id=str(property_id),
+            properties_id=str(property_id),
             geom=ST_SetSRID(ST_GeomFromGeoJSON(geom), 4674)
         )
         self._conn.execute(stmt_geom)

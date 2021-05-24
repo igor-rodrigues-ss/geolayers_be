@@ -13,18 +13,17 @@ from src.framework.log import LOGGER
 from src.config import UPLOADED_FILE_PATH
 
 
-# TODO: criar docker para deploy
-    # - TODO: Criar dockerfile com virtualhost do rabbitmq
+
 # TODO: criar uma página de download para arquivos de teste
 # TODO: criar schemas de request e response
+# TODO: ajustar base de dados
 
-# TODO: ajustar nome do projeto
 # TODO: criar validação para arquivos que não possuem extensão
 # TODO: criar endpoint de helth check para validar memcached, db, celery
 # TODO: Adicionar uma ferramenta de log para monitoramento em tempo real (Prometheus ou Grafana)
 
 
-# TODO: ajustar base de dados
+
 # TODO: configurar ondelete cascade e onUpade cascade no banco
 # TODO: criar autenticação
 # TODO: adicionar upload de geojson e geopackage
@@ -33,7 +32,6 @@ from src.config import UPLOADED_FILE_PATH
 # TODO: ajustar tipagens do front e do back
 
 
-# poetry run sqlacodegen postgresql://postgres:123456@localhost:5432/geolayer --noclasses > models.py
 # docker run --name memcached -p 11211:11211 --rm -d memcached memcached --threads 4 -m 1024
 # docker run -d --rm --net=host rabbitmq
 # poetry run celery -A src.celery.app worker --loglevel=info

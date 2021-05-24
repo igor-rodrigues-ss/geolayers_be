@@ -1,77 +1,46 @@
 # coding: utf-8
-from sqlalchemy import Boolean, CheckConstraint, Column, ForeignKey, Integer, JSON, MetaData, String, Table, Text, text
+from sqlalchemy import Boolean, CheckConstraint, Column, ForeignKey, JSON, MetaData, String, Table, text
 from sqlalchemy.dialects.postgresql import UUID
 from geoalchemy2.types import Geometry
 
 metadata = MetaData()
 
 
-t_geography_columns = Table(
-    'geography_columns', metadata,
-    Column('f_table_catalog', String),
-    Column('f_table_schema', String),
-    Column('f_table_name', String),
-    Column('f_geography_column', String),
-    Column('coord_dimension', Integer),
-    Column('srid', Integer),
-    Column('type', Text)
-)
-
-
-t_geometry_columns = Table(
-    'geometry_columns', metadata,
-    Column('f_table_catalog', String(256)),
-    Column('f_table_schema', String),
-    Column('f_table_name', String),
-    Column('f_geometry_column', String),
-    Column('coord_dimension', Integer),
-    Column('srid', Integer),
-    Column('type', String(30))
-)
-
-
 t_layer = Table(
     'layer', metadata,
     Column('id', UUID, primary_key=True, server_default=text("uuid_generate_v4()")),
-    Column('nome', String(256), nullable=False)
+    Column('nome', String(256), nullable=False),
+    schema='layers'
 )
 
 
-t_spatial_ref_sys = Table(
-    'spatial_ref_sys', metadata,
-    Column('srid', Integer, primary_key=True),
-    Column('auth_name', String(256)),
-    Column('auth_srid', Integer),
-    Column('srtext', String(2048)),
-    Column('proj4text', String(2048)),
-    CheckConstraint('(srid > 0) AND (srid <= 998999)')
-)
-
-
-t_layer_properties = Table(
-    'layer_properties', metadata,
+t_properties = Table(
+    'properties', metadata,
     Column('id', UUID, primary_key=True, server_default=text("uuid_generate_v4()")),
-    Column('layer_id', ForeignKey('layer.id'), nullable=False),
-    Column('propertie', JSON, nullable=False)
+    Column('layer_id', ForeignKey('layers.layer.id'), nullable=False),
+    Column('properties', JSON, nullable=False),
+    schema='layers'
 )
 
 
 t_styles = Table(
     'styles', metadata,
     Column('id', UUID, primary_key=True, server_default=text("uuid_generate_v4()")),
-    Column('id_layer', ForeignKey('layer.id'), nullable=False),
+    Column('layer_id', ForeignKey('layers.layer.id'), nullable=False),
     Column('color', String(20), nullable=False),
-    Column('fill', Boolean, nullable=False)
+    Column('fill', Boolean, nullable=False),
+    schema='layers'
 )
 
 
-t_layer_geometries = Table(
-    'layer_geometries', metadata,
+t_geometries = Table(
+    'geometries', metadata,
     Column('id', UUID, primary_key=True, server_default=text("uuid_generate_v4()")),
-    Column('layer_id', ForeignKey('layer.id'), nullable=False),
-    Column('propertie_id', ForeignKey('layer_properties.id'), nullable=False),
+    Column('layer_id', ForeignKey('layers.layer.id'), nullable=False),
+    Column('properties_id', ForeignKey('layers.properties.id'), nullable=False),
     Column('geom', Geometry(from_text='ST_GeomFromEWKT', name='geometry')),
-    CheckConstraint('st_srid(geom) = 4674')
+    CheckConstraint('st_srid(geom) = 4674'),
+    schema='layers'
 )
 # coding: utf-8
 from sqlalchemy import Column, MetaData, String, Table, Text
