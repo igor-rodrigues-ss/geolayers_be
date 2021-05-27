@@ -6,6 +6,9 @@ from src.cache.icache import ICache
 
 class NoCache(ICache):
 
+    def name(self) -> str:
+        return 'NoCache'
+
     def client(self) -> object:
         return None
 

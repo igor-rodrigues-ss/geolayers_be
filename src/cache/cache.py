@@ -11,6 +11,9 @@ class CacheSingleton(ICache):
     def __init__(self, engine: ICache):
         self._engine = engine
 
+    def name(self) -> str:
+        return self._engine.name()
+
     def update_engine(self, engine: ICache):
         self._engine = engine
 

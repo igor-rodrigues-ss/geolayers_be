@@ -3,7 +3,6 @@
 from src.db.async_connection import ASYNC_DB
 from src.apps.layer.mvt.envelope_sql import EnvelopeSQL
 from typing import Generator
-
 from sqlalchemy.sql.expression import text
 
 

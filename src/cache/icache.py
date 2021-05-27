@@ -7,6 +7,10 @@ from src.config import CACHE_EXPTIME
 class ICache(ABC):
 
     @abstractmethod
+    def name(self) -> str:
+        return
+
+    @abstractmethod
     def client(self) -> object:
         pass
 

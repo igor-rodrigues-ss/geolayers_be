@@ -2,29 +2,23 @@
 
 import os
 from fastapi import FastAPI
-from src.db.async_connection import ASYNC_DB
 from fastapi.middleware.cors import CORSMiddleware
 from src.rest.layer.routes import router as layer_router
 from src.rest.tasks.routes import router as tasks_router
+from src.rest.health.routes import router as health_router
 from src.cache.cache import CACHE
 from src.cache.engines.no_cache import NoCache
 from src.middlewares.try_except import try_except
 from src.framework.log import LOGGER
 from src.config import UPLOADED_FILE_PATH
 
-
-
 # TODO: criar uma página de download para arquivos de teste
 # TODO: criar schemas de request e response
-# TODO: ajustar base de dados
+# TODO: criar testes unitários do health check
 
 # TODO: criar validação para arquivos que não possuem extensão
-# TODO: criar endpoint de helth check para validar memcached, db, celery
 # TODO: Adicionar uma ferramenta de log para monitoramento em tempo real (Prometheus ou Grafana)
 
-
-
-# TODO: configurar ondelete cascade e onUpade cascade no banco
 # TODO: criar autenticação
 # TODO: adicionar upload de geojson e geopackage
 # TODO: criar desenho com a arquitetura do back (MEMCACHED, FastAPI, CELERY e RABBIT)
@@ -60,7 +54,7 @@ def create_app():
             print('Cache Habilitado')
         except Exception as ex:
             print('Cache Desabilitado')
-            CACHE.update_engine(NoCache())
+            # CACHE.update_engine(NoCache())
 
         if not os.path.exists(UPLOADED_FILE_PATH):
             os.makedirs(UPLOADED_FILE_PATH)
@@ -76,6 +70,12 @@ def create_app():
         prefix="/tasks", tags=["Tasks"],
         responses={404: {"description": "Not found"}},
     )
+    app.include_router(
+        health_router,
+        prefix="/health", tags=["Health"],
+        responses={404: {"description": "Not found"}},
+    )
+
 
 
     return app

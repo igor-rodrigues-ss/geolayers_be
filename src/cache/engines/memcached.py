@@ -18,6 +18,9 @@ class MemCachedCache(ICache):
             pool_minsize=CACHE_POOL_SIZE_MIN, pool_maxsize=CACHE_POOL_SIZE_MAX
         )
 
+    def name(self) -> str:
+        return 'MemCached'
+
     def client(self) -> object:
         return self._client
 

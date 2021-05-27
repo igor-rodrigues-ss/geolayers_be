@@ -5,6 +5,10 @@ import os
 from pydantic import BaseSettings
 
 
+# Health Check
+UP = 'UP'
+DOWN = 'DOWN'
+
 ROOT_DIR = os.path.dirname(
     os.path.dirname(
         os.path.abspath(__file__)

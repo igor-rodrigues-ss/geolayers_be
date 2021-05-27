@@ -4,11 +4,12 @@
 from src.config import ENVS, DB_POOL_MAX_SIZE
 from sqlalchemy.ext.asyncio import create_async_engine
 from sqlalchemy.ext.asyncio import AsyncEngine
+from sqlalchemy.sql.expression import text
 
 
 class AsyncConnection:
 
-    _engine: AsyncEngine = None
+    _engine: AsyncEngine
 
     def __init__(self, host: str, db_name: str, user: str, password: str, port: int):
         self._host = host
@@ -25,6 +26,11 @@ class AsyncConnection:
 
     def engine(self) -> AsyncEngine:
         return self._engine
+
+    async def test_connection(self):
+        async with self._engine.connect() as conn:
+            rcur = await conn.execute(text('SELECT 1'))
+            return bool(rcur.fetchone()[0])
 
     # async def close(self):
     #     if self._pool is not None:
