@@ -13,7 +13,6 @@ from src.middlewares.try_except import try_except
 from src.framework.log import LOGGER
 from src.config import UPLOADED_FILE_PATH
 
-# TODO: criar schemas de request e response
 # TODO: criar testes unitários do health check
 # TODO: deixar uma estrutura de banco vazia salva
 
@@ -55,7 +54,7 @@ def create_app():
             print('Cache Habilitado')
         except Exception as ex:
             print('Cache Desabilitado')
-            # CACHE.update_engine(NoCache())
+            CACHE.update_engine(NoCache())
 
         if not os.path.exists(UPLOADED_FILE_PATH):
             os.makedirs(UPLOADED_FILE_PATH)
