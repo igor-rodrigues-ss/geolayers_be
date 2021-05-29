@@ -6,15 +6,16 @@ from fastapi.middleware.cors import CORSMiddleware
 from src.rest.layer.routes import router as layer_router
 from src.rest.tasks.routes import router as tasks_router
 from src.rest.health.routes import router as health_router
+from src.rest.file_models.routes import router as files_models_router
 from src.cache.cache import CACHE
 from src.cache.engines.no_cache import NoCache
 from src.middlewares.try_except import try_except
 from src.framework.log import LOGGER
 from src.config import UPLOADED_FILE_PATH
 
-# TODO: criar uma página de download para arquivos de teste
 # TODO: criar schemas de request e response
 # TODO: criar testes unitários do health check
+# TODO: deixar uma estrutura de banco vazia salva
 
 # TODO: criar validação para arquivos que não possuem extensão
 # TODO: Adicionar uma ferramenta de log para monitoramento em tempo real (Prometheus ou Grafana)
@@ -73,6 +74,11 @@ def create_app():
     app.include_router(
         health_router,
         prefix="/health", tags=["Health"],
+        responses={404: {"description": "Not found"}},
+    )
+    app.include_router(
+        files_models_router,
+        prefix="/file-models", tags=["File Models"],
         responses={404: {"description": "Not found"}},
     )
 

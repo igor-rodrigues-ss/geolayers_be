@@ -15,6 +15,8 @@ ROOT_DIR = os.path.dirname(
     )
 )
 
+FILE_MODELS_PATH = os.path.join(ROOT_DIR, 'static', 'file_models')
+
 DB_POOL_MAX_SIZE = 4
 
 CACHE_EXPTIME = 0
