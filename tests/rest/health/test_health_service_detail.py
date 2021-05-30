@@ -8,6 +8,7 @@ from tests.rest.health.fixtures import (
 )
 from tests.conftest import SOME_DICT_INFO
 from src.config import DB_SERVICE, MEM_CACHED_SERVICE, CELERY_SERVICE
+from src.framework.exc_codes import INEXISTING_SERVICE
 
 
 class TestHealthServiceDetail:
@@ -51,3 +52,8 @@ class TestHealthServiceDetail:
         url = url_for('health_detail', service_name=INEXISTING_SERVICE)
         resp = client.get(url)
         assert bool(resp.json()['detail']['msg'])
+
+    def test_get_inexisting_service_code(self, client):
+        url = url_for('health_detail', service_name=INEXISTING_SERVICE)
+        resp = client.get(url)
+        assert resp.json()['detail']['code'] == INEXISTING_SERVICE

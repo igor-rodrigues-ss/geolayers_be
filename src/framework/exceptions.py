@@ -54,3 +54,20 @@ class InexistingService(HTTPException):
                 'exc': exc
             }
         )
+
+
+class InexistingFileModel(HTTPException):
+
+    def __init__(self):
+        msg = 'Arquivo inexistente'
+        code = INEXISTING_FILE_MODEL
+        exc = ''
+
+        super().__init__(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail={
+                'msg': msg,
+                'code': code,
+                'exc': exc
+            }
+        )

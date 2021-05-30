@@ -2,7 +2,7 @@
 
 import os
 from src.config import FILE_MODELS_PATH
-from fastapi import HTTPException
+from src.framework.exceptions import InexistingFileModel
 
 
 class FileModelsService:
@@ -14,8 +14,7 @@ class FileModelsService:
         fpath = os.path.join(FILE_MODELS_PATH, fname)
 
         if not os.path.exists(fpath):
-            # TODO: ajustar esta exception
-            raise HTTPException(status_code=400)
+            raise InexistingFileModel()
 
         fname = os.path.basename(fpath)
 

@@ -1,8 +1,8 @@
 #!-*-coding:utf-8-*-
 
 import os
-from tests.conftest import url_for
 from fastapi import status
+from tests.conftest import url_for
 from src.config import FILE_MODELS_PATH
 
 
