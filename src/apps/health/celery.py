@@ -2,18 +2,17 @@
 
 from src.apps.health.ihealth import IHealth
 from src.celery.app import celery_app
-from src.config import UP, DOWN
+from src.config import UP, DOWN, CELERY_SERVICE
 from src.apps.health.health_status import HealthStatus
 
 
 class CeleryHealth(IHealth):
 
     def __init__(self):
-        self._name = 'Celery'
         self._inspect = celery_app.control.inspect()
 
     def name(self) -> str:
-        return self._name
+        return CELERY_SERVICE
 
     async def hstatus(self) -> HealthStatus:
         ping = self._inspect.ping()

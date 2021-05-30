@@ -2,7 +2,7 @@
 
 
 from src.config import (
-    ENVS, CACHE_POOL_SIZE_MIN, CACHE_POOL_SIZE_MAX
+    ENVS, CACHE_POOL_SIZE_MIN, CACHE_POOL_SIZE_MAX, MEM_CACHED_SERVICE
 )
 
 from aiomemcached import Client
@@ -19,7 +19,7 @@ class MemCachedCache(ICache):
         )
 
     def name(self) -> str:
-        return 'MemCached'
+        return MEM_CACHED_SERVICE
 
     def client(self) -> object:
         return self._client

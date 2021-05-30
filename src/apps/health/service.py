@@ -27,7 +27,6 @@ class Service:
 
     async def check(self) -> List[dict]:
         checks = []
-
         for _, service in self._services.items():
             checks.append(
                await service.check()

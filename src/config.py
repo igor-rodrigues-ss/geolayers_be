@@ -58,3 +58,9 @@ ENVS = Envs()
 
 UPLOADED_FILE_PATH = os.path.join(ENVS.STORAGE_PATH, 'uploaded_files')
 
+# External Services Names
+CELERY_SERVICE = 'Celery'
+MEM_CACHED_SERVICE = 'MemCached'
+NO_CACHE_SERVICE = 'NoCache'
+DB_SERVICE = 'Geo Layers'
+
