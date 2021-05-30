@@ -59,6 +59,10 @@ def pytest_sessionfinish(session, exitstatus):
     config.drop_test_database()
 
 
+SOME_MSG = 'SOME_MSG'
+SOME_DICT_INFO = {}
+INEXISTING_SERVICE = 'abc'
+
 #from async_asgi_testclient import TestClient
 # async with TestClient(app) as client:
 # await client.post(

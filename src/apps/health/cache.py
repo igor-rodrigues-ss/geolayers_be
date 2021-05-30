@@ -21,6 +21,3 @@ class CacheHealth(IHealth):
             await CACHE.delete(b'teste')
             return HealthStatus(UP)
 
-    async def details(self) -> dict:
-        return {}
-

@@ -2,7 +2,8 @@
 
 from src.apps.health.service import Service
 
-class HealthView:
+
+class HealthCheckView:
 
     async def get(self):
         return await Service().check()

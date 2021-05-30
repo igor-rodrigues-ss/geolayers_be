@@ -6,6 +6,7 @@ from src.apps.health.ihealth import IHealth
 from src.apps.health.cache import CacheHealth
 from src.apps.health.celery import CeleryHealth
 from src.config import UP, DOWN
+from src.framework.exceptions import InexistingService
 
 
 class Service:
@@ -42,5 +43,5 @@ class Service:
     async def details(self, service_name: str):
         service = self._services.get(service_name, None)
         if service is None:
-            return {'msg': 'Serviço Inexistente'}
+            raise InexistingService()
         return await service.details()

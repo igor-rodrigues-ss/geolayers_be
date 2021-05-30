@@ -2,14 +2,14 @@
 
 
 from src.rest.health.views import (
-    HealthView, HeathServicesView, HealthServicesDetail
+    HealthCheckView, HeathServicesView, HealthServicesDetail
 )
 from src.rest.health.schemas import health_check, list_services, service_detail
 from fastapi import APIRouter
 
 
 router = APIRouter()
-health = HealthView()
+health = HealthCheckView()
 serv = HeathServicesView()
 details = HealthServicesDetail()
 
