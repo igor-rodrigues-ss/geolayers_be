@@ -1,27 +1,22 @@
 #!-*-coding:utf-8-*-
 
-import os
-from src.config import FILE_MODELS_PATH
-from fastapi.exceptions import HTTPException
+
 from starlette.responses import FileResponse
+from src.apps.file_models.service import FileModelsService
 
 
 class FileModelsList:
 
-    async def get(self):
-        return os.listdir(FILE_MODELS_PATH)
+    def get(self):
+        return FileModelsService().list_all()
 
 
 class FileModelsDownload:
 
-    async def get(self, fname: str):
-        fpath = os.path.join(FILE_MODELS_PATH, fname)
-
-        if not os.path.exists(fpath):
-            raise HTTPException(status_code=400)
-
-        fname = os.path.basename(fpath)
-
+    def get(self, fname: str):
+        fdata = FileModelsService().fdata(fname)
         return FileResponse(
-            fpath, media_type='application/octet-stream', filename=fname
+            fdata['path'],
+            media_type='application/octet-stream',
+            filename=fdata['name']
         )

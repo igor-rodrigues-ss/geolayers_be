@@ -13,7 +13,8 @@ from src.middlewares.try_except import try_except
 from src.framework.log import LOGGER
 from src.config import UPLOADED_FILE_PATH
 
-# TODO: criar testes unitários do health check
+# TODO: padronizar o nome do services
+# TODO: criar testes para o download de arquivos modelo
 # TODO: deixar uma estrutura de banco vazia salva
 
 # TODO: criar validação para arquivos que não possuem extensão

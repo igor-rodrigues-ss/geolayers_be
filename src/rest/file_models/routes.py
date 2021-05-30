@@ -13,14 +13,14 @@ dv = FileModelsDownload()
 
 router.get(
     '',
-    name='files_model_list',
+    name='file_models_list',
     responses={200: {'content': {'application/json': {'example': list_file_models}}}}
 
 )(lv.get)
 
 router.get(
     '/{fname}',
-    name='files_model_download',
+    name='file_models_download',
     response_class=FileResponse,
     responses={200: {'content': {'application/octet-stream': {'example': 'bytes'}}}}
 )(dv.get)
