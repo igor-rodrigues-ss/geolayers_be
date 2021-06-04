@@ -1,7 +1,7 @@
-from src.apps.tasks.repository import TasksSaveLayerRepository
+from src.apps.tasks.repository import LayerTasksRepository
 
 
 class TasksSaveLayer:
 
     async def list_all(self):
-        return await TasksSaveLayerRepository().list_all()
+        return await LayerTasksRepository().list_all()

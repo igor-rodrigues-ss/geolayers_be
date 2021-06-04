@@ -1,5 +1,5 @@
 
-from typing import Dict, List
+from typing import Dict, List, Union, Any
 
 from src.apps.health.db import DBHealth
 from src.apps.health.ihealth import IHealth
@@ -9,7 +9,7 @@ from src.config import UP, DOWN
 from src.framework.exceptions import InexistingService
 
 
-class Service:
+class HealthService:
 
     _services: Dict[str, IHealth]
 
@@ -26,7 +26,7 @@ class Service:
                 return DOWN
         return UP
 
-    async def check(self) -> List[dict]:
+    async def check(self) -> dict[str, Union[list[dict], Any]]:
         checks = []
         for _, service in self._services.items():
             checks.append(

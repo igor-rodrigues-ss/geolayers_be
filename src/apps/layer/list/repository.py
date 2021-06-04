@@ -5,7 +5,7 @@ from src.db.models import t_layer, t_styles
 from typing import List
 
 
-class LayerListRepo:
+class LayerListRepository:
 
     async def list_all(self) -> List[dict]:
         data = {}

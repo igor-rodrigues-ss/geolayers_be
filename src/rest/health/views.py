@@ -1,23 +1,23 @@
 #!-*-coding:utf-8-*-
 
-from src.apps.health.service import Service
+from src.apps.health.service import HealthService
 
 
 class HealthCheckView:
 
     async def get(self):
-        return await Service().check()
+        return await HealthService().check()
 
 
 class HeathServicesView:
 
     async def get(self):
-        return Service().services_names()
+        return HealthService().services_names()
 
 
 class HealthServicesDetail:
 
     async def get(self, service_name: str):
-        return await Service().details(
+        return await HealthService().details(
             service_name
         )

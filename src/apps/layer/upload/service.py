@@ -6,7 +6,7 @@ from src.apps.layer.upload.task import save_layer
 from src.apps.layer.upload.sent_file import SentFile
 
 
-class LayerUpload:
+class LayerUploadService:
 
     async def save(self, file: UploadFile, color: str, fill: bool):
         sf = SentFile(file)

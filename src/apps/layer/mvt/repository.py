@@ -6,7 +6,7 @@ from typing import Generator
 from sqlalchemy.sql.expression import text
 
 
-class TileRepository:
+class LayerMVTRepository:
 
     _env: EnvelopeSQL
 

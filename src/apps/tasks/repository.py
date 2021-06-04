@@ -5,7 +5,7 @@ from src.db.models import t_save_layer
 from src.db.async_connection import ASYNC_DB
 
 
-class TasksSaveLayerRepository:
+class LayerTasksRepository:
 
     async def list_all(self):
         async with ASYNC_DB.engine().begin() as conn:
