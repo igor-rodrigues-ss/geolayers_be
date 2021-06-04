@@ -3,6 +3,7 @@
 
 
 # TODO: deixar uma estrutura de banco vazia salva (deixar uma estrtura para ambiente de DEV documentada)
+# TODO: Documentar neste README o Deploy
 # TODO: criar desenho com a arquitetura do back (MEMCACHED, FastAPI, CELERY e RABBIT)
 
 

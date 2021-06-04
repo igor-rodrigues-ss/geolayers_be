@@ -24,7 +24,7 @@
 - GDAL 3.0.4
 - Docker
 
-### Dev Mode
+### Development Mode
 ```shell
 cd /path/to/geolayers_be
 
@@ -38,13 +38,13 @@ docker run --name memcached -p 11211:11211 --rm -d memcached memcached --threads
 docker run -d --rm --net=host rabbitmq
 
 # Starting worker
-pipenv run celery_dev.py 
+pipenv run python celery_dev.py 
 
 # Starting worker monitoring service
 pipenv run celery -A src.celery.app worker --loglevel=info
 
 # Starting API
-pipenv run dev.py
+pipenv run python dev.py
 
 # Access: http://localhost:8000/docs
 ```
