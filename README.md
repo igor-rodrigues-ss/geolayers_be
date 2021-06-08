@@ -19,7 +19,9 @@
 
 ### Features
 - Shapefile Upload
-- Mapbox Vector Tile (MVT) Generator
+- Mapbox Vector Tile Generator
+- Download shapefile templates
+- View executing uploads
 
 ### Requirements
 - Python3.8
