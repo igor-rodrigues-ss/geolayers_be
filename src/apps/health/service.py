@@ -1,5 +1,5 @@
 
-from typing import Dict, List, Union, Any
+from typing import Dict, Union, Any, List
 
 from src.apps.health.db import DBHealth
 from src.apps.health.ihealth import IHealth
@@ -26,7 +26,7 @@ class HealthService:
                 return DOWN
         return UP
 
-    async def check(self) -> dict[str, Union[list[dict], Any]]:
+    async def check(self) -> Dict[str, Union[List[dict], Any]]:
         checks = []
         for _, service in self._services.items():
             checks.append(

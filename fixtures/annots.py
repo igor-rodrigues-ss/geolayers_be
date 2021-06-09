@@ -7,6 +7,7 @@
 # TODO: criar desenho com a arquitetura do back (MEMCACHED, FastAPI, CELERY e RABBIT)
 
 
+# TODO: criar parâmetro do script de deploy para para criar base de dados inicial no deploy da aplicação
 # TODO: criar validação para arquivos que não possuem extensão
 # TODO: Adicionar uma ferramenta de log para monitoramento em tempo real (Prometheus ou Grafana)
 # TODO: criar autenticação
