@@ -1,13 +1,6 @@
 
+# TODO: criar parâmetro do script de deploy para criar base de dados inicial no deploy da aplicação
 
-
-
-# TODO: deixar uma estrutura de banco vazia salva (deixar uma estrtura para ambiente de DEV documentada)
-# TODO: Documentar neste README o Deploy
-# TODO: criar desenho com a arquitetura do back (MEMCACHED, FastAPI, CELERY e RABBIT)
-
-
-# TODO: criar parâmetro do script de deploy para para criar base de dados inicial no deploy da aplicação
 # TODO: criar validação para arquivos que não possuem extensão
 # TODO: Adicionar uma ferramenta de log para monitoramento em tempo real (Prometheus ou Grafana)
 # TODO: criar autenticação
