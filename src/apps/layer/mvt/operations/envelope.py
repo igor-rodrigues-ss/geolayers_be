@@ -1,7 +1,7 @@
 #!-*-coding:utf-8-*-
 
 
-from src.apps.layer.mvt.tile import Tile
+from src.apps.layer.mvt.operations.tile import Tile
 
 
 class Envelope:

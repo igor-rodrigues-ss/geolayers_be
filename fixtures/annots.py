@@ -1,5 +1,9 @@
 
-# TODO: criar parâmetro do script de deploy para criar base de dados inicial no deploy da aplicação
+
+
+
+# TODO: criar migration para ambiente de DEV
+# TODO: criar tratamente de exception caso a aplicação conecte na base de dados mas o banco não tenha startado ainda.
 
 # TODO: criar validação para arquivos que não possuem extensão
 # TODO: Adicionar uma ferramenta de log para monitoramento em tempo real (Prometheus ou Grafana)

@@ -1,6 +1,6 @@
 #!-*-coding:utf-8-*-
 
-from src.apps.health.ihealth import IHealth
+from src.apps.health.operations.ihealth import IHealth
 from src.db.async_connection import ASYNC_DB
 from src.config import UP, DOWN, DB_SERVICE
 from src.framework.log import LOGGER

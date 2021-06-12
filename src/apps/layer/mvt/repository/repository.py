@@ -1,7 +1,7 @@
 #!-*-coding:utf-8-*-
-
+from src.apps.layer.mvt.operations.envelope import Envelope
 from src.db.async_connection import ASYNC_DB
-from src.apps.layer.mvt.envelope_sql import EnvelopeSQL
+from src.apps.layer.mvt.repository.envelope_sql import EnvelopeSQL
 from typing import Generator
 from sqlalchemy.sql.expression import text
 
@@ -10,8 +10,8 @@ class LayerMVTRepository:
 
     _env: EnvelopeSQL
 
-    def __init__(self, env: EnvelopeSQL):
-        self._env = env
+    def __init__(self, layer_id: str, envelope: Envelope):
+        self._env = EnvelopeSQL(layer_id, envelope)
 
     async def get_one(self) -> Generator[bytes, None, None]:
         pbf = None

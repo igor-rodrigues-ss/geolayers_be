@@ -1,6 +1,6 @@
 #!-*-coding:utf-8-*-
 from src.apps.health.health_status import HealthStatus
-from src.apps.health.ihealth import IHealth
+from src.apps.health.operations.ihealth import IHealth
 from src.cache.cache import CACHE
 from src.config import UP, DOWN
 from src.framework.log import LOGGER

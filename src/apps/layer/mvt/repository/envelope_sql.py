@@ -1,7 +1,7 @@
 #!-*-coding:utf-8-*-
 
 
-from src.apps.layer.mvt.envelope import Envelope
+from src.apps.layer.mvt.operations.envelope import Envelope
 from src.config import MERCATOR_SRID, MVT_DENSIFY_FACTOR
 
 
@@ -9,10 +9,9 @@ class EnvelopeSQL:
 
     _env: Envelope
 
-    def __init__(self, layer_id: str, env: Envelope, mvt_lyr_data: dict):
+    def __init__(self, layer_id: str, env: Envelope):
         self._env = env
         self._layer_id = layer_id
-        self._mvt_lyr_data = mvt_lyr_data
 
     def _bounds_sql(self):
         """

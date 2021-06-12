@@ -3,7 +3,7 @@
 
 from fastapi import UploadFile
 from src.apps.layer.upload.task import save_layer
-from src.apps.layer.upload.sent_file import SentFile
+from src.apps.layer.upload.operations.sent_file import SentFile
 
 
 class LayerUploadService:

@@ -1,10 +1,10 @@
 
 from typing import Dict, Union, Any, List
 
-from src.apps.health.db import DBHealth
-from src.apps.health.ihealth import IHealth
-from src.apps.health.cache import CacheHealth
-from src.apps.health.celery import CeleryHealth
+from src.apps.health.operations.db import DBHealth
+from src.apps.health.operations.ihealth import IHealth
+from src.apps.health.operations.cache import CacheHealth
+from src.apps.health.operations.celery import CeleryHealth
 from src.config import UP, DOWN
 from src.framework.exceptions import InexistingService
 

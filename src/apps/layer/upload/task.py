@@ -4,7 +4,7 @@
 from src.celery.app import celery_app
 from celery.utils.log import get_task_logger
 from src.db.sync_connection import SYNC_DB
-from src.apps.layer.upload.shapefile import Shapefile
+from src.apps.layer.upload.operations.shapefile import Shapefile
 from src.apps.layer.upload.repository.layer_upload import LayerUploadRepository
 from src.apps.layer.upload.repository.task_save_layer_decorator import TaskSaveLayer
 

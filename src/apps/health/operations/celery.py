@@ -1,6 +1,6 @@
 #!-*-coding:utf-8-*-
 
-from src.apps.health.ihealth import IHealth
+from src.apps.health.operations.ihealth import IHealth
 from src.celery.app import celery_app
 from src.config import UP, DOWN, CELERY_SERVICE
 from src.apps.health.health_status import HealthStatus
