@@ -69,3 +69,6 @@ MAX_ATTEMPS = 10
 SLEEP_FOR_NEXT_ATTEMPT = 3
 
 # Tempo total = MAX_ATTEMPS x SLEEPT_FOR_NEXT_ATTEMPT
+
+BASE_FILES = os.path.join(ROOT_DIR, 'static', 'base_files')
+BR_GEOM_PATH = os.path.join(BASE_FILES, 'br_geom.wkt')

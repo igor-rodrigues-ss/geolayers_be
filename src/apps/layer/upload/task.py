@@ -2,7 +2,7 @@
 
 
 import celery
-from src.apps.layer.upload.operations.validation import Validation
+from src.apps.layer.upload.validations.geom_inside_brazil import GeomInsideBrazil
 from src.celery.app import celery_app
 from celery.utils.log import get_task_logger
 from src.db.sync_connection import SYNC_DB
@@ -37,8 +37,11 @@ def save_layer(lyr_name: str, path: str, color: str, fill: bool):
             conn, save_layer.request.id, lyr_name
         )
         try:
+            logger.info('Registrando a task')
             task_save_layer_repo.register_task()
-            Validation(save_layer.br_geom(), shape).validate()
+            logger.info('Fazendo validação do território nacional')
+            GeomInsideBrazil(save_layer.br_geom(), shape).validate()
+            logger.info('Salvando dados')
             lyr_upload_repository.save()
         except Exception as ex:
             task_save_layer_repo.register_error(ex)

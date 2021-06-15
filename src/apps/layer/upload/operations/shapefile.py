@@ -4,7 +4,7 @@
 from typing import Generator
 from vectorio.compress import Zip
 from vectorio.vector import Shapefile as ShapefileVIO, ShapefileCompressed
-from osgeo.ogr import CreateGeometryFromJson, Geometry
+from osgeo.ogr import Geometry
 
 
 class Shapefile:
@@ -19,6 +19,5 @@ class Shapefile:
     def features(self) -> Generator[str, None, None]:
         return self._shape.features()
 
-    def geometry(self) -> Geometry:
-        return CreateGeometryFromJson(self._shape.geometry_collection())
-
+    def geometries(self) -> Geometry:
+        return self._shape.geometries()

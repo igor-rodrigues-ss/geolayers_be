@@ -6,11 +6,10 @@ from typing import Generator
 from sqlalchemy.engine.base import Connection
 from geoalchemy2.functions import ST_GeomFromGeoJSON, ST_SetSRID
 from src.db.models import t_styles, t_layer, t_geometries, t_properties
-from src.apps.layer.upload.repository.ilayer_upload import ILayerUploadRepository
 from uuid import UUID
 
 
-class LayerUploadRepository(ILayerUploadRepository):
+class LayerUploadRepository:
 
     _features: Generator[str, None, None]
     _conn: Connection

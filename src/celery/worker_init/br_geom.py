@@ -1,11 +1,11 @@
 #!-*-coding:utf-8-*-
 
 from osgeo.ogr import CreateGeometryFromWkt
+from src.config import BR_GEOM_PATH
 
 
 class BRGeom:
 
     def geom(self):
-        # TODO: mudar este arquivo de lugar
-        with open('/home/igor/br_geom.wkt') as f:
+        with open(BR_GEOM_PATH) as f:
             return CreateGeometryFromWkt(f.read())

@@ -3,7 +3,10 @@
 
 
 # TODO: criar migration para ambiente de DEV
-# TODO: criar tratamente de exception caso a aplicação conecte na base de dados mas o banco não tenha startado ainda.
+
+# TODO: tratar exception no front caso a aplicação não tenha startado
+# TODO: salvar arquivo do brasil no projeto
+# TODO: Remover msg de espera do banco no geolayers_deploy
 
 # TODO: criar validação para arquivos que não possuem extensão
 # TODO: Adicionar uma ferramenta de log para monitoramento em tempo real (Prometheus ou Grafana)

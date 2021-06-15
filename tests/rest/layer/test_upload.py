@@ -59,3 +59,4 @@ class TestUploadlayer:
             task = conn.execute(stmt).fetchone()
             assert task.status == WORKER_STATUS_FAILURE
             assert task.detail == self._exc_msg()
+
