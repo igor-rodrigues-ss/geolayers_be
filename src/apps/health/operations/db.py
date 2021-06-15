@@ -4,7 +4,7 @@ from src.apps.health.operations.ihealth import IHealth
 from src.db.async_connection import ASYNC_DB
 from src.config import UP, DOWN, DB_SERVICE
 from src.framework.log import LOGGER
-from src.apps.health.health_status import HealthStatus
+from src.apps.health.entities.health_status import HealthStatus
 
 
 class DBHealth(IHealth):

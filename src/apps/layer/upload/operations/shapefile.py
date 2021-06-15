@@ -4,17 +4,21 @@
 from typing import Generator
 from vectorio.compress import Zip
 from vectorio.vector import Shapefile as ShapefileVIO, ShapefileCompressed
+from osgeo.ogr import CreateGeometryFromJson, Geometry
 
 
 class Shapefile:
 
-    _path: str
+    _shape: ShapefileCompressed
 
     def __init__(self, path: str):
-        self._path = path
+        self._shape = ShapefileCompressed(
+            ShapefileVIO(path, search_encoding_exception=False), compress_engine=Zip()
+        )
 
     def features(self) -> Generator[str, None, None]:
-        shape = ShapefileCompressed(
-            ShapefileVIO(self._path, search_encoding_exception=False), compress_engine=Zip()
-        )
-        return shape.features()
+        return self._shape.features()
+
+    def geometry(self) -> Geometry:
+        return CreateGeometryFromJson(self._shape.geometry_collection())
+

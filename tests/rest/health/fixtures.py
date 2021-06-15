@@ -4,7 +4,7 @@ import pytest
 from src.apps.health.operations.db import DBHealth
 from src.apps.health.operations.celery import CeleryHealth
 from src.apps.health.operations.cache import CacheHealth
-from src.apps.health.health_status import HealthStatus
+from src.apps.health.entities.health_status import HealthStatus
 from src.config import UP, DOWN, MEM_CACHED_SERVICE
 from tests.conftest import SOME_MSG, SOME_DICT_INFO
 

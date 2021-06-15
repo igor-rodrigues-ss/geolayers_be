@@ -64,3 +64,8 @@ MEM_CACHED_SERVICE = 'MemCached'
 NO_CACHE_SERVICE = 'NoCache'
 DB_SERVICE = 'Geo Layers'
 
+# First DB Connection
+MAX_ATTEMPS = 10
+SLEEP_FOR_NEXT_ATTEMPT = 3
+
+# Tempo total = MAX_ATTEMPS x SLEEPT_FOR_NEXT_ATTEMPT

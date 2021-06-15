@@ -3,7 +3,7 @@
 from src.apps.health.operations.ihealth import IHealth
 from src.celery.app import celery_app
 from src.config import UP, DOWN, CELERY_SERVICE
-from src.apps.health.health_status import HealthStatus
+from src.apps.health.entities.health_status import HealthStatus
 
 
 class CeleryHealth(IHealth):

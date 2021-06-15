@@ -2,7 +2,7 @@
 
 
 from abc import ABC, abstractmethod
-from src.apps.health.health_status import HealthStatus
+from src.apps.health.entities.health_status import HealthStatus
 
 
 class IHealth(ABC):

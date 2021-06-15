@@ -3,7 +3,7 @@
 
 from tests.conftest import url_for
 from src.config import UP, MEM_CACHED_SERVICE, DB_SERVICE, CELERY_SERVICE
-from src.apps.health.health_status import HealthStatus
+from src.apps.health.entities.health_status import HealthStatus
 from tests.rest.health.fixtures import (
     celery_up, cache_up, cache_name_memcached
 )

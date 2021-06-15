@@ -4,23 +4,17 @@
 from src.config import ENVS, DB_POOL_MAX_SIZE
 from sqlalchemy.ext.asyncio import create_async_engine
 from sqlalchemy.ext.asyncio import AsyncEngine
+from src.db.iconnection import IConnection
 from sqlalchemy.sql.expression import text
 
 
-class AsyncConnection:
+class AsyncConnection(IConnection):
 
     _engine: AsyncEngine
 
     def __init__(self, host: str, db_name: str, user: str, password: str, port: int):
-        self._host = host
-        self._db_name = db_name
-        self._user = user
-        self._password = password
-        self._port = port
-
-    def create_engine(self):
         self._engine = create_async_engine(
-            f"postgresql+asyncpg://{self._user}:{self._password}@{self._host}:{self._port}/{self._db_name}",
+            f"postgresql+asyncpg://{user}:{password}@{host}:{port}/{db_name}",
             pool_size=DB_POOL_MAX_SIZE,
         )
 
@@ -28,14 +22,9 @@ class AsyncConnection:
         return self._engine
 
     async def test_connection(self):
-        async with self._engine.connect() as conn:
+        async with ASYNC_DB.engine().connect() as conn:
             rcur = await conn.execute(text('SELECT 1'))
             return bool(rcur.fetchone()[0])
-
-    # async def close(self):
-    #     if self._pool is not None:
-    #         self._pool.close()
-    #         await self._pool.wait_closed()
 
 
 ASYNC_DB = AsyncConnection(
@@ -45,4 +34,3 @@ ASYNC_DB = AsyncConnection(
     ENVS.DB_PASSWORD,
     ENVS.DB_PORT
 )
-ASYNC_DB.create_engine()

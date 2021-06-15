@@ -1,8 +1,11 @@
 #!-*-coding:utf-8-*-
 
 import os
+import sys
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from src.on_boot.validations.cache import CacheValidation
+from src.on_boot.validations.db_connection import DBConnectionValidation
 from src.rest.layer.routes import router as layer_router
 from src.rest.tasks.routes import router as tasks_router
 from src.rest.health.routes import router as health_router
@@ -30,16 +33,21 @@ def create_app():
     # Events ===========================================
     @app.on_event('startup')
     async def startup():
-        try:
-            await CACHE.set(b'teste', b'1')
-            await CACHE.delete(b'teste')
-            print('Cache Habilitado')
-        except Exception as ex:
-            print('Cache Desabilitado')
+        cache_valid = await CacheValidation().validate()
+        if not cache_valid:
             CACHE.update_engine(NoCache())
 
         if not os.path.exists(UPLOADED_FILE_PATH):
             os.makedirs(UPLOADED_FILE_PATH)
+
+        conn_valid = await DBConnectionValidation().validate()
+        if conn_valid:
+            LOGGER.info('Connexão realizada com sucesso!!!!')
+        else:
+            sys.exit('Impossível criar uma conexão válida com a base de dados.')
+
+
+
 
     # Routes ==============================================
     app.include_router(

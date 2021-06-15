@@ -15,6 +15,6 @@
 
 
 # docker run --name memcached -p 11211:11211 --rm -d memcached memcached --threads 4 -m 1024
-# docker run -d --rm --net=host rabbitmq
-# poetry run celery -A src.celery.app worker --loglevel=info
+# docker run -d --rm --net=host rabbitmq:3.8
+#  pipenv run python celery_dev.py
 # Dados Abertos - https://forest-gis.com/download-de-shapefiles/

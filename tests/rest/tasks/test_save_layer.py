@@ -2,6 +2,8 @@
 
 import pytest
 from fastapi import status
+from src.db.models import t_save_layer
+from src.db.sync_connection import SYNC_DB
 from tests.conftest import url_for
 from src.config import WORKER_STATUS_SUCCESS
 from tests.utils import is_uuid
@@ -10,6 +12,9 @@ from tests.constants import FILL, FILE_NAME, PATH, COLOR, NAME
 
 @pytest.fixture(scope='module', autouse=True)
 def create_layer(client):
+    with SYNC_DB.engine().connect() as conn:
+        conn.execute(t_save_layer.delete())
+
     client.post(
         url_for('upload_layer'),
         files={'file': (FILE_NAME, open(PATH, "rb"))},
