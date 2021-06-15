@@ -62,7 +62,7 @@ UPLOADED_FILE_PATH = os.path.join(ENVS.STORAGE_PATH, 'uploaded_files')
 CELERY_SERVICE = 'Celery'
 MEM_CACHED_SERVICE = 'MemCached'
 NO_CACHE_SERVICE = 'NoCache'
-DB_SERVICE = 'Geo Layers'
+DB_SERVICE = 'GeoLayers DB'
 
 # First DB Connection
 MAX_ATTEMPS = 10
